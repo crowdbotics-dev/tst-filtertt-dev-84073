@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { Pressable } from "react-native";
+import { useState } from "react";
 import { Text, View, TouchableOpacity, Image, TouchableHighlight, TextInput, StyleSheet } from "react-native";
 
 const Login2 = () => {
@@ -8,54 +9,56 @@ const Login2 = () => {
     setSelected(!selected);
   };
 
-  return <View style={styles.container}>
-      <View style={styles.heading}>
-        <Text style={styles.headingText}>Log in</Text>
-      </View>
-      <View>
-        <View style={styles.emailContainer}>
-          <Text style={styles.mr10}>Email address</Text>
-          <Input placeholder="Email" />
+  return <Pressable>
+      <View style={styles.container}>
+        <View style={styles.heading}>
+          <Text style={styles.headingText}>Log in</Text>
         </View>
-        <View style={styles.mb20}>
-          <Text style={styles.mr10}>Password</Text>
-          <Input placeholder="Password" />
-        </View>
-        <View style={styles.forgotPassword}>
-          <View>
-            <CheckBox onPress={onPress} selected={selected} text="Remember me" />
+        <View>
+          <View style={styles.emailContainer}>
+            <Text style={styles.mr10}>Email address</Text>
+            <Input placeholder="enter mail address" />
           </View>
+          <View style={styles.mb20}>
+            <Text style={styles.mr10}>Password</Text>
+            <Input placeholder="Password" />
+          </View>
+          <View style={styles.forgotPassword}>
+            <View>
+              <CheckBox onPress={onPress} selected={selected} text="Remember me" />
+            </View>
+            <TouchableOpacity>
+              <Text>Forgot Password?</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.loginContainer}>
+            <Button>Log In</Button>
+          </View>
+          <View style={styles.orContainer}>
+            <View style={styles.line} />
+            <Text style={styles.orText}>Or</Text>
+            <View style={styles.line} />
+          </View>
+          <View style={styles.imageContainer}>
+            <View style={styles.iconContainer}>
+              <Image source={require("./assets/appleIcon.png")} style={styles.icon} />
+            </View>
+            <View style={styles.iconContainer}>
+              <Image source={require("./assets/googleIcon.png")} style={styles.icon} />
+            </View>
+            <View style={styles.iconContainer}>
+              <Image source={require("./assets/fbIcon.png")} style={styles.icon} />
+            </View>
+          </View>
+        </View>
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>Do not have an account?</Text>
           <TouchableOpacity>
-            <Text>Forgot Password?</Text>
+            <Text>Sign Up</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.loginContainer}>
-          <Button>Log In</Button>
-        </View>
-        <View style={styles.orContainer}>
-          <View style={styles.line} />
-          <Text style={styles.orText}>Or</Text>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.imageContainer}>
-          <View style={styles.iconContainer}>
-            <Image source={require("./assets/appleIcon.png")} style={styles.icon} />
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require("./assets/googleIcon.png")} style={styles.icon} />
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require("./assets/fbIcon.png")} style={styles.icon} />
-          </View>
-        </View>
       </View>
-      <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>Do not have an account?</Text>
-        <TouchableOpacity>
-          <Text>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>;
+    </Pressable>;
 };
 
 const styles = StyleSheet.create({
@@ -213,7 +216,7 @@ const checkBoxStyles = StyleSheet.create({
 
 const Input = props => {
   return <View>
-      <TextInput style={textStyles.input} placeholder={props.placeholder} value={props.value} onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} />
+      <TextInput style={textStyles.input} placeholder="e" onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} value="email" />
       {props.errorText ? <Text style={textStyles.error}>{props.errorText}</Text> : null}
     </View>;
 };

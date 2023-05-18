@@ -1,4 +1,4 @@
-import * as React from "react";
+import "react";
 import { Text, View, StyleSheet, TextInput, TouchableHighlight } from "react-native";
 
 const pressed = () => {
@@ -124,7 +124,7 @@ const btnStyles = StyleSheet.create({
 
 const Input = props => {
   return <View>
-      <TextInput style={inputStyles.input} placeholder={props.placeholder} value={props.value} onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} />
+      <TextInput style={inputStyles.input} placeholder={props.placeholder} onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} value="password" />
       {props.errorText ? <Text style={inputStyles.error}>{props.errorText}</Text> : null}
     </View>;
 };
