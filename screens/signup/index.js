@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Text, View, TouchableOpacity, Image, StyleSheet, TextInput, TouchableHighlight } from "react-native";
 
 const pressed = () => {
@@ -13,15 +14,15 @@ const Signup = () => {
       <View>
         <View style={styles.emailContainer}>
           <Text style={styles.mr10}>Email address</Text>
-          <Input placeholder='Email' />
+          <Input placeholder="Email" />
         </View>
         <View style={styles.mb20}>
           <Text style={styles.mr10}>Password</Text>
-          <Input placeholder='Enter' />
+          <Input placeholder="Enter" />
         </View>
         <View style={styles.mb20}>
           <Text style={styles.mr10}>Confirm password</Text>
-          <Input placeholder='Enter' />
+          <Input placeholder="Enter" />
         </View>
 
         <View style={styles.loginContainer}>
@@ -79,12 +80,6 @@ const styles = StyleSheet.create({
   mb20: {
     marginBottom: 20
   },
-  forgotPassword: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 40
-  },
   loginContainer: {
     width: "80%",
     alignSelf: "center"
@@ -140,7 +135,7 @@ const styles = StyleSheet.create({
 export default Signup;
 
 const Button = props => {
-  return <TouchableHighlight onPress={props.onPress} underlayColor='#DDDDDD'>
+  return <TouchableHighlight onPress={props.onPress} underlayColor="#DDDDDD">
       <View style={[btnStyles.button, {
       backgroundColor: props.backgroundColor ? props.backgroundColor : "#000000",
       height: props.height ? props.height : 49,
@@ -149,7 +144,9 @@ const Button = props => {
     }]}>
         <Text style={[btnStyles.text, {
         color: props.color ? props.color : "#ffffff"
-      }]}>{props.children}</Text>
+      }]}>
+          {props.children}
+        </Text>
       </View>
     </TouchableHighlight>;
 };
@@ -168,8 +165,12 @@ const btnStyles = StyleSheet.create({
 });
 
 const Input = props => {
+  const {
+    entities: email
+  } = useSelector(state => state.email);
+  const [localEmail, setLocalEmail] = useState(email.email);
   return <View>
-      <TextInput style={textStyles.input} placeholder={props.placeholder} value={props.value} onChangeText={num => props.setValue(num)} placeholderTextColor='#ddd' editable={props.editable !== false} />
+      <TextInput style={textStyles.input} placeholder={props.placeholder} onChangeText={num => props.setValue(num)} placeholderTextColor="#ddd" editable={props.editable !== false} value={localEmail} />
       {props.errorText ? <Text style={textStyles.error}>{props.errorText}</Text> : null}
     </View>;
 };
